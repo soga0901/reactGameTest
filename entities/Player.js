@@ -3,10 +3,13 @@ import {
   View,
   Image,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import BOY_IMAGE from '../images/Idle.gif';
 
 const RADIUS = 25;
+const rightEnd = 330;
+const leftEnd = -20;
 
 const styles = StyleSheet.create({
   player: {
@@ -20,8 +23,11 @@ const styles = StyleSheet.create({
 
 const Player = (props) => {
   const { position } = props;
-  const x = position[0];
-  const y = position[1]
+  let x = position[0];
+  let y = position[1];
+
+  if (x >= rightEnd) x = rightEnd;
+  if (x <= leftEnd) x = leftEnd;
 
   return (
     <View>

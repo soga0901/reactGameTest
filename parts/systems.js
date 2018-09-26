@@ -1,3 +1,6 @@
+let isOver = false;
+let isClear = false;
+
 const MoveFinger = (entities, { touches }) => {
   touches.filter(t => t.type === 'move').forEach(t => {
     let finger = entities[t.id];
@@ -12,4 +15,4 @@ const MoveFinger = (entities, { touches }) => {
   return entities;
 };
 
-export { MoveFinger };
+export { MoveFinger, isOver, isClear };

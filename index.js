@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Player from './entities/Player';
+import Enemy from './entities/Enemy';
 import { MoveFinger } from './parts/systems';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
@@ -24,16 +25,6 @@ export default class GameTest extends PureComponent {
     };
   }
 
-  updateHandler = ({ touches, screen, time }) => {
-    let move = touches.find(x => x.type === "move");
-    if (move) {
-      this.setState({
-        x: this.state.x + move.delta.pageX,
-        y: this.state.y + move.delta.pageY
-      });
-    }
-  };
-
   render() {
     const {
       x,
@@ -43,11 +34,13 @@ export default class GameTest extends PureComponent {
     return (
       <GameEngine
         style={styles.container}
-        onUpdate={this.updateHandler}
         systems={[MoveFinger]}
         running
         entities={{
-          1: { position: [x,  y], renderer: <Player /> }
+          1: { position: [160, 600], renderer: <Player /> },
+          2: { position: [3, 100], renderer: <Enemy />, speed: 8 },
+          3: { position: [4, 100], renderer: <Enemy />, speed: 4 },
+          4: { position: [5, 100], renderer: <Enemy />},
         }}
       >
       </GameEngine>
@@ -58,7 +51,7 @@ export default class GameTest extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "lightgray"
   },
 });
 
